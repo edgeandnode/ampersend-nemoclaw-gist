@@ -1,59 +1,205 @@
-# ampersend x NeMo Claw — Quick Reference
+# ampersend × NVIDIA NeMo Claw
 
-## What is this?
+## Economic Control Layer for Enterprise Agents
 
-ampersend adds an **economic control layer** to NVIDIA NeMo Claw agents — enabling payments, budgets, and spend observability for enterprise agent workflows.
+## 1. Context
 
-> "Stripe + Guardrails + Observability" for agent economies
+As enterprise agents (NeMo / Claw) become more capable, they increasingly:
 
-## The Gap
+- Call external APIs (tools, MCP servers)
+- Delegate tasks to other agents
+- Execute workflows with real-world cost implications
 
-NeMo Claw agents can reason, orchestrate, and stay safe — but they can't natively handle:
+However, today there is **no standardized way to:**
 
-- **How much** to spend
-- **Who** to pay
-- **When** to stop spending
+- Handle payments between agents/services
+- Enforce budgets and guardrails on spend
+- Monitor economic behavior of agents
 
-ampersend solves this.
+---
 
-## How It Works
+## 2. What ampersend Does
 
-```
-Agent (NeMo/Claw) → calls paid API
-API returns 402 Payment Required
-ampersend checks policy (budget / allowlist) → signs payment
-Request retried with payment → API executes → result returned
-```
+ampersend is a **management + execution layer for agent payments and controls**, built on open standards:
 
-## Built On Open Standards
+- x402 (Coinbase) → payments
+- A2A (Google) → agent-to-agent communication
+- MCP → tool/API execution
 
-| Standard | Purpose |
-|----------|---------|
-| [x402 (Coinbase)](https://github.com/coinbase/x402) | Payments |
-| [A2A (Google)](https://github.com/google-agentic-commerce/a2a-x402) | Agent-to-agent communication |
-| [MCP](https://modelcontextprotocol.io/) | Tool/API execution |
+It enables:
 
-## Integration Points
+- 💸 Programmatic payments (pay-per-request APIs)
+- 🧠 Policy enforcement (budgets, limits, allowlists)
+- 📊 Observability (real-time spend + behavior)
+- 🔁 Automation (no manual payment handling)
 
-- **Guardrails + Economic Policies** — max spend per task/day, allowed vendors, escalation on high-cost actions
-- **Tool Usage (MCP/APIs)** — native pay-per-use, no custom billing logic
-- **Multi-Agent Payments** — agent-to-agent payments, service monetization
-- **Observability** — real-time dashboards, spend tracking, policy enforcement logs
+> Think: "Stripe + Guardrails + Observability" for agent economies
 
-## Links
+---
 
-- [ampersend overview](https://www.ampersend.ai/skill.md)
-- [Full docs](https://docs.ampersend.ai/)
-- [ampersend SDK](https://github.com/ampersend-ai/ampersend-sdk)
-- [Demo repo](https://github.com/edgeandnode/ampersend-nemoclaw)
-- [Loom walkthrough](https://www.loom.com/share/a4be92f174c7441c86032f64745f55fb)
+## 3. Quick Links (Best Starting Points)
 
-## TL;DR
+👉 Start here (high-level overview):  
+https://www.ampersend.ai/skill.md
 
-| Layer | Solves |
-|-------|--------|
-| NeMo | Reasoning + orchestration |
-| Guardrails | Safety + constraints |
-| ampersend | Payments + economic control |
+👉 Full documentation:  
+https://docs.ampersend.ai/
 
-**Together = production-ready autonomous agents**
+👉 SDK + reference implementation:  
+https://github.com/ampersend-ai/ampersend-sdk
+
+👉 x402 protocol:  
+https://github.com/coinbase/x402
+
+👉 A2A (agent-to-agent):  
+https://github.com/google-agentic-commerce/a2a-x402
+
+👉 MCP (tool execution layer):  
+https://modelcontextprotocol.io/
+
+---
+
+## 4. Why This Matters for NVIDIA (NeMo / Claw)
+
+NeMo + Guardrails solve:
+
+- reasoning
+- safety
+- orchestration
+
+ampersend complements this by solving:
+
+- **economic execution layer**
+
+### Key Gap Today
+
+Agents can decide _what to do_, but not safely decide:
+
+- how much to spend
+- who to pay
+- when to stop
+
+---
+
+## 5. Integration Points with NeMo / Claw
+
+### (A) Guardrails → Economic Policies
+
+Guardrails today enforce output constraints.
+
+ampersend extends this to enforce **financial constraints**:
+
+- Max spend per task / day
+- Allowed vendors / APIs
+- Escalation on high-cost actions
+
+---
+
+### (B) Tool Usage (MCP / APIs)
+
+Without ampersend:
+
+Agent → Tool/API → Response
+
+With ampersend:
+
+Agent → (402 Payment Required)  
+→ Payment handled automatically  
+→ Tool executes
+
+- No custom billing logic
+- Native pay-per-use infrastructure
+
+---
+
+### (C) Multi-Agent Systems
+
+NeMo Claw enables multi-agent orchestration.
+
+ampersend enables:
+
+- agent-to-agent payments
+- service monetization
+- marketplace dynamics
+
+---
+
+### (D) Observability Layer
+
+For enterprise deployment:
+
+- Who did the agent pay?
+- How much was spent?
+- Which tools are most expensive?
+- Where are failures / retries?
+
+ampersend provides:
+
+- real-time dashboards
+- spend tracking
+- policy enforcement logs
+
+---
+
+## 6. Example Flow
+
+1. Agent (NeMo/Claw) calls a paid API
+2. API returns `402 Payment Required`
+3. ampersend:
+   - checks policy (budget / allowlist)
+   - signs payment via agent wallet
+4. Request retried with payment
+5. API executes → returns result
+
+---
+
+## 7. Why This Fits NVIDIA
+
+NVIDIA is an **enabler of agent ecosystems**.
+
+ampersend fits as:
+
+- a plug-in economic layer
+- not competing with agent frameworks
+- enhancing enterprise readiness
+
+---
+
+## 8. Potential Collaboration Areas
+
+- NeMo Claw + ampersend reference integration
+- Guardrails + financial policies
+- Enterprise agent demos (retail vertical)
+- Joint ecosystem events (with LangChain)
+
+---
+
+## 9. TL;DR
+
+NeMo = reasoning + orchestration  
+Guardrails = safety + constraints  
+ampersend = payments + economic control
+
+→ Together = production-ready autonomous agents
+
+---
+
+## 10. Demo: ampersend + NeMo Claw Integration
+
+🎥 **Loom walkthrough:**  
+https://www.loom.com/share/a4be92f174c7441c86032f64745f55fb
+
+💻 **GitHub repo:**  
+https://github.com/edgeandnode/ampersend-nemoclaw
+
+---
+
+## 👉 Suggested Next Step
+
+Would love for you to:
+
+1. Take a quick look at the SDK repo
+2. Skim the overview doc (~5 mins)
+3. If this looks interesting, we'd love an intro to the retail team selling NeMo Claw to enterprises interested in payment use cases — happy to show them how ampersend fits in
+
+Happy to walk through a live demo as well.
